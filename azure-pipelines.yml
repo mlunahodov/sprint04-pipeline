@@ -43,6 +43,8 @@
                 testResultsFiles: "**/TEST-*.xml"
                 javaHomeOption: "JDKVersion"
                 sonarQubeRunAnalysis: false
+              env:
+                SPRING_PROFILES_ACTIVE: 'test'
 
             - script: ./gradlew --stop
               displayName: Gradlew stop
