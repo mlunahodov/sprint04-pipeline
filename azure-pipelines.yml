@@ -12,7 +12,8 @@
     RM: "557074"
     azureSubscription: AzureVroom
     DB_NAME: mydatabase
-    DB_USER: myuser
+    DB_USERNAME: myuser
+    DB_URL: jdbc:postgresql://aci-db-vroom-rm557074.eastus.azurecontainer.io:5432/mydatabase
   
     
 
@@ -141,7 +142,7 @@
                     --os-type Linux \
                     --dns-name-label "$APP_DNS_LABEL" \
                     --location "$(AZURE_LOCATION)" \
-                    --restart-policy Always
+                    --restart-policy never
 
                   APP_URL="http://$APP_DNS_LABEL.$(AZURE_LOCATION).azurecontainer.io:8080"
                   echo "✅ Application deployed at: $APP_URL"
