@@ -39,7 +39,7 @@
                 gradleWrapperFile: "gradlew"
                 tasks: "build"
                 publishJUnitResults: true
-                options: "--build-cache"
+                options: '--build-cache -D"spring.profiles.active=test"'
                 testResultsFiles: "**/TEST-*.xml"
                 javaHomeOption: "JDKVersion"
                 sonarQubeRunAnalysis: false
