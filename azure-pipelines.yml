@@ -13,7 +13,7 @@
     azureSubscription: AzureVroom
     DB_NAME: mydatabase
     DB_USER: myuser
-    SPRING_DATASOURCE_URL: jdbc:postgresql://aci-db-vroom-rm557074.eastus.azurecontainer.io:5432/$DB_NAME
+  
     
 
   stages:
