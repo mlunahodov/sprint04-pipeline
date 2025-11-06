@@ -45,8 +45,8 @@
                 sonarQubeRunAnalysis: false
               env:
                 SPRING_PROFILES_ACTIVE: 'test'
-                SPRING_DATASOURCE_URL=""
-                SPRING_FLYWAY_URL="
+                SPRING_DATASOURCE_URL:""
+                SPRING_FLYWAY_URL:"
 
             - script: ./gradlew --stop
               displayName: Gradlew stop
