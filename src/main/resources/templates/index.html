@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vroom</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212121;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #1c1c1c;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #28a745;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        nav li {
+            display: inline;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 3rem;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn-logout {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-logout:hover {
+            background-color: #c82333;
+        }
+
+        .tags-container {
+            display: grid;
+            grid-template-columns: repeat(9, 50px);
+            gap: 12px;
+            justify-content: center;
+            align-content: start;
+            padding: 20px;
+        }
+
+        .tag {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .tag:hover {
+            background-color: #d4d4d4;
+        }
+
+        .tag-label {
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: #000;
+            margin: 0;
+        }
+
+        .filter-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .filter-button {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .filter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .filter-btn.reset {
+            border: none;
+            background-color: #666;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">
+        <span class="logo">Vroom</span>
+    </div>
+    <ul>
+        <li>
+            <form method="post" th:action="@{/logout}">
+                <button type="submit" class="btn btn-logout btn-sm text-white">Logout</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+
+<h1>Olá, <span th:text="${username}"></span>!</h1>
+
+<div class="filter-nav">
+    <button class="filter-button reset">Todos</button>
+    <button class="filter-button"
+            th:each="p : ${T(io.github.Guimaraes131.vroom.motorcycle.enums.ProblemCategory).values()}"
+            th:text="${p.getValue()}"
+            th:attr="data-problem=${p.name()}"
+            th:style="'background-color:' + ${p.associatedColor} + '; color: #000;'">
+    </button>
+</div>
+
+<div class="tags-container">
+    <a class="tag"
+       th:each="tag : ${tags}"
+       th:href="${tag.color != null} ? @{/motorcycle/{id}(id=${tag.motorcycle.id})} : @{/motorcycle/form(tagId=${tag.id})}"
+       th:style="${tag.color != null ? 'background-color:' + tag.color : 'background-color:#e6e6e6'}"
+       th:attr="data-problem=${tag.motorcycle != null ? tag.motorcycle.problem.name() : ''}">
+        <p class="tag-label" th:text="${tag.getCoordinate()}"></p>
+    </a>
+</div>
+
+<div id="no-tags-message" style="display: none; text-align: center; margin-top: 20px; color: #fff;">
+    Não há motos com esse problema
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const tags = document.querySelectorAll('.tags-container .tag');
+    const noTagsMessage = document.getElementById('no-tags-message');
+
+    function updateNoTagsMessage() {
+        const anyVisible = Array.from(tags).some(tag => tag.style.display !== 'none');
+        noTagsMessage.style.display = anyVisible ? 'none' : 'block';
+    }
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const problem = btn.dataset.problem;
+            tags.forEach(tag => {
+                if (!problem || tag.dataset.problem === problem) {
+                    tag.style.display = 'flex';
+                } else {
+                    tag.style.display = 'none';
+                }
+            });
+            updateNoTagsMessage();
+        });
+    });
+
+    updateNoTagsMessage();
+</script>
+
+</body>
+</html>

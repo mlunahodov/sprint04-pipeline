@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vroom - Informações da Moto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@500&display=swap"
+          rel="stylesheet">
+    <style>
+        body {
+          background-color: #292929;
+          color: #FFF;
+          font-family: 'Poppins', sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          min-height: 100vh;
+        }
+
+        .container {
+          max-width: 600px;
+          width: 100%;
+          padding: 20px;
+        }
+
+        h2 {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 2rem;
+          text-align: center;
+          margin-bottom: 20px;
+          color: #28a745;
+        }
+
+        .info-container {
+          background-color: #353535;
+          border-radius: 12px;
+          padding: 24px;
+        }
+
+        .row {
+          display: flex;
+          gap: 12px;
+          margin-bottom: 12px;
+          flex-wrap: wrap;
+        }
+
+        .info-card {
+          flex: 1;
+          background-color: #3F3F3F;
+          border-radius: 8px;
+          padding: 16px;
+          text-align: center;
+        }
+
+        .info-card strong {
+          display: block;
+          font-size: 0.85rem;
+          color: #b5b5b5;
+          margin-bottom: 6px;
+        }
+
+        .info-card span {
+          font-size: 1rem;
+          font-weight: 500;
+        }
+
+        .buttons-container {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 20px;
+        }
+
+        .buttons-row {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .btn {
+          flex: 1;
+          padding: 14px;
+          border-radius: 6px;
+          text-align: center;
+          font-weight: 500;
+          color: #FFF;
+          text-decoration: none;
+          border: none;
+          cursor: pointer;
+          font-family: 'Poppins', sans-serif;
+          transition: 0.2s;
+        }
+
+        .back-btn { background-color: #28a745; }
+        .back-btn:hover { background-color: #218838; }
+
+        .locate-btn { background-color: #00D200; }
+        .locate-btn:hover { background-color: #00b700; }
+
+        .edit-btn { background-color: #ffc107; color: #292929; }
+        .edit-btn:hover { background-color: #e0a800; }
+
+        .delete-btn {
+            background-color: #E53935;
+            width: 100%;
+        }
+        .delete-btn:hover { background-color: #c82333; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:text="'Moto ' + ${motorcycle.tag.coordinate}"></h2>
+
+    <div class="info-container">
+        <div class="row">
+            <div class="info-card">
+                <strong>Placa</strong>
+                <span th:text="${motorcycle.licensePlate}"></span>
+            </div>
+            <div class="info-card">
+                <strong>Modelo</strong>
+                <span th:text="${motorcycle.model}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="info-card">
+                <strong>Chassi</strong>
+                <span th:text="${motorcycle.chassis}"></span>
+            </div>
+            <div class="info-card">
+                <strong>Problema</strong>
+                <span th:text="${motorcycle.problem}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="info-card" style="flex: 1 1 100%;">
+                <strong>Descrição</strong>
+                <span th:text="${motorcycle.problemDescription}"></span>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <div class="buttons-row">
+                <a th:href="@{/tags}" class="btn back-btn">Voltar</a>
+                <button class="btn locate-btn">Localizar moto</button>
+            </div>
+
+            <div class="buttons-row">
+                <a th:href="@{/motorcycle/update/{id}(id=${motorcycle.id})}" class="btn edit-btn">Editar informações</a>
+
+                <form sec:authorize="hasRole('MANAGER')"
+                      th:action="@{'/motorcycle/' + ${motorcycle.id}}"
+                      method="post" style="flex:1; display:flex;">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button class="btn delete-btn" type="submit">Excluir moto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

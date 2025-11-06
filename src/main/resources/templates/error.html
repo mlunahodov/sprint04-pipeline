@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vroom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212121;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .error-container {
+            width: 450px;
+            padding: 3rem;
+            background: #1c1c1c;
+            border-radius: 1rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #bbbbbb;
+            margin-bottom: 2rem;
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            color: white;
+        }
+        a {
+            text-decoration: none;
+            color: #28a745;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1>Vroom</h1>
+    <h2>Erro!</h2>
+    <p>Ocorreu um problema inesperado.</p>
+    <a href="javascript:history.back()" class="btn-primary">Voltar</a>
+</div>
+</body>
+</html>

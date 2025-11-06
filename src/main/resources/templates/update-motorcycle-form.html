@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vroom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+        background-color: #292929;
+        color: #FFF;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 8px 34px;
+    }
+    h2 {
+        font-weight: 500;
+        margin-bottom: 12px;
+    }
+    .form-container {
+        background-color: #353535;
+        border-radius: 10px;
+        padding: 32px;
+        margin-top: 20px;
+    }
+    .row {
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .input-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 12px;
+    }
+    label {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    input, select, textarea {
+        border-radius: 5px;
+        padding: 16px;
+        border: none;
+        background-color: #3F3F3F;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 12px;
+        font-family: 'Poppins', sans-serif;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .buttons-container {
+        margin-top: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+    .submit-button {
+        background-color: #fd7e14;
+        border-radius: 5px;
+        padding: 16px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        color: #FFF;
+        font-family: 'Poppins', sans-serif;
+    }
+    .submit-button:hover {
+        background-color: #e66900;
+    }
+    .cancel-button {
+        background-color: #292929;
+        border-radius: 5px;
+        padding: 16px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        color: #FFF;
+        font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <p>Nome Operador: <span th:text="${username}"></span></p>
+  </header>
+  <section>
+    <h2>Editar moto</h2>
+    <p>Atualize as informações abaixo.</p>
+  </section>
+
+  <form method="post" th:object="${motorcycleForm}" th:action="@{/motorcycle/{id}(id=${motorcycleId})}" class="form-container" id="motoForm">
+    <input type="hidden" name="_method" value="put"/>
+    <input th:field="*{tagId}" type="hidden" id="tagInput" name="tagId">
+
+    <div class="row">
+      <div class="input-wrapper">
+        <label for="plate">Placa</label>
+        <input th:field="*{licensePlate}" type="text" id="plate" placeholder="Digite a placa">
+        <span th:if="${#fields.hasErrors('licensePlate')}" th:errors="*{licensePlate}" style="color: #ff4d4f; font-size: 12px;"></span>
+      </div>
+      <div class="input-wrapper">
+        <label for="model">Modelo</label>
+        <select th:field="*{model}" id="model">
+          <option disabled value="">Selecione um modelo</option>
+          <option th:each="m : ${T(io.github.Guimaraes131.vroom.motorcycle.enums.MotorcycleModel).values()}"
+                  th:value="${m}" th:text="${m}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}" style="color: #ff4d4f; font-size: 12px;"></span>
+      </div>
+    </div>
+
+    <div class="input-wrapper">
+      <label for="chassis">Chassi</label>
+      <input th:field="*{chassis}" type="text" id="chassis" placeholder="Digite o chassi">
+      <span th:if="${#fields.hasErrors('chassis')}" th:errors="*{chassis}" style="color: #ff4d4f; font-size: 12px;"></span>
+    </div>
+
+    <div class="input-wrapper">
+      <label for="situation">Situação</label>
+      <select th:field="*{problem}" id="situation">
+        <option disabled value="">Selecione um problema</option>
+        <option th:each="p : ${T(io.github.Guimaraes131.vroom.motorcycle.enums.ProblemCategory).values()}"
+                th:value="${p}" th:text="${p}"></option>
+      </select>
+      <span th:if="${#fields.hasErrors('problem')}" th:errors="*{problem}" style="color: #ff4d4f; font-size: 12px;"></span>
+    </div>
+
+    <div class="input-wrapper">
+      <label for="description">Descrição do Problema</label>
+      <textarea th:field="*{problemDescription}" id="description" rows="4"
+                placeholder="Faça uma descrição dos problemas da moto"></textarea>
+      <span th:if="${#fields.hasErrors('problemDescription')}" th:errors="*{problemDescription}" style="color: #ff4d4f; font-size: 12px;"></span>
+    </div>
+
+    <div class="buttons-container">
+      <button type="submit" class="submit-button">Atualizar moto</button>
+      <div class="cancel-button" onclick="window.history.back()">Cancelar</div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
