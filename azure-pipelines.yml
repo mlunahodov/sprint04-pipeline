@@ -136,7 +136,7 @@
                       DB_PASSWORD="$(DB_PASSWORD)" \
                       SPRING_JPA_HIBERNATE_DDL_AUTO=update \
                       SPRING_FLYWAY_URL="$(DB_URL)" \
-                      SPRING_FLYWAY_USER="$(DB_USERAME)" \
+                      SPRING_FLYWAY_USER="$(DB_USERNAME)" \
                       SPRING_FLYWAY_PASSWORD="$(DB_PASSWORD)" \
                     --ports 8080 \
                     --os-type Linux \
