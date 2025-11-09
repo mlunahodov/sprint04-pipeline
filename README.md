@@ -77,7 +77,7 @@ Antes de executar a aplicação, certifique-se de ter instalado:
 
 2. **Construir a imagem Docker e enviar para o Azure Container Registry (ACR):**
    ```bash
-   ./scripts/build.sh
+   ./scripts/setup.sh
    ```
 
 3. **Implantar no Azure Container Instances (ACI):**
