@@ -1,6 +1,8 @@
 # 🏍️ Vroom
 
-Vroom é um projeto desenvolvido para gerenciar estacionamentos de motocicletas, permitindo o cadastro de veículos, o acompanhamento de vagas e monitorar o problema do veículo. O sistema combina componentes de hardware, software e banco de dados para otimizar o controle e a identificação de veículos de maneira prática e eficaz.
+Vroom é um projeto desenvolvido para gerenciar estacionamentos de motocicletas, permitindo o cadastro de veículos, o
+acompanhamento de vagas e monitorar o problema do veículo. O sistema combina componentes de hardware, software e banco
+de dados para otimizar o controle e a identificação de veículos de maneira prática e eficaz.
 
 ---
 
@@ -14,25 +16,33 @@ Vroom é um projeto desenvolvido para gerenciar estacionamentos de motocicletas,
 
 ## 🛠️ Descrição do Projeto
 
-A proposta do projeto é desenvolver uma solução tecnológica voltada para otimizar a organização e o monitoramento de motocicletas em pátios, tornando a gestão e a identificação dos veículos mais ágil e precisa. Para isso, o sistema contará com a integração de diferentes componentes, como Arduino, um aplicativo móvel e um banco de dados centralizado.
+A proposta do projeto é desenvolver uma solução tecnológica voltada para otimizar a organização e o monitoramento de
+motocicletas em pátios, tornando a gestão e a identificação dos veículos mais ágil e precisa. Para isso, o sistema
+contará com a integração de diferentes componentes, como Arduino, um aplicativo móvel e um banco de dados centralizado.
 
-A solução contará com pequenas placas eletrônicas, denominadas **Tags**, que serão fixadas em cada motocicleta. Cada Tag será equipada com:
+A solução contará com pequenas placas eletrônicas, denominadas **Tags**, que serão fixadas em cada motocicleta. Cada Tag
+será equipada com:
 
 - 🔊 Um **buzzer** para sinalização sonora;
 - 💡 Um **LED** para indicação visual;
 - 🧲 Um **ímã** que permitirá uma fixação prática e segura na moto.
 
-Ao chegar ao pátio, cada motocicleta terá seus dados, como **placa, chassi e informações sobre eventuais problemas**, registrados em um banco de dados. Essas informações poderão ser consultadas por meio de uma **API desenvolvida em Java**.
+Ao chegar ao pátio, cada motocicleta terá seus dados, como **placa, chassi e informações sobre eventuais problemas**,
+registrados em um banco de dados. Essas informações poderão ser consultadas por meio de uma **API desenvolvida em Java
+**.
 
-Além disso, os funcionários responsáveis pelo controle e monitoramento das motocicletas no pátio terão acesso a um **aplicativo móvel integrado ao banco de dados**.
+Além disso, os funcionários responsáveis pelo controle e monitoramento das motocicletas no pátio terão acesso a um *
+*aplicativo móvel integrado ao banco de dados**.
 
 Com ele será possível:
+
 - 📋 Consultar informações detalhadas de cada moto, como placa, chassi e problemas registrados;
 - ✏️ Alterar ou atualizar os dados das motocicletas conforme necessário;
 - 🔔 Acionar o buzzer da motocicleta selecionada, emitindo sinais sonoros;
 - 🌈 Visualizar no LED a cor correspondente ao problema da moto.
 
-Essa solução tem como objetivo **facilitar a localização rápida das motocicletas no pátio**, reduzindo o tempo gasto na identificação dos veículos e garantindo uma gestão mais eficiente.
+Essa solução tem como objetivo **facilitar a localização rápida das motocicletas no pátio**, reduzindo o tempo gasto na
+identificação dos veículos e garantindo uma gestão mais eficiente.
 
 ---
 
@@ -115,6 +125,7 @@ Após o deploy, a aplicação estará disponível no seguinte endereço:
 
 ## 📌 Observações
 
-- O projeto foi desenvolvido para rodar na **nuvem Azure** utilizando **ACR (Azure Container Registry)** e **ACI (Azure Container Instances)**.
+- O projeto foi desenvolvido para rodar na **nuvem Azure** utilizando **ACR (Azure Container Registry)** e **ACI (Azure
+  Container Instances)**.
 - O banco de dados utilizado é o **PostgreSQL em nuvem**, garantindo persistência dos dados.
 - Toda a aplicação é containerizada, seguindo boas práticas de **DevOps**.
